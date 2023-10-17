@@ -1,5 +1,8 @@
-import 'package:projeto_imc/projeto_imc.dart' as projeto_imc;
+import 'package:projeto_imc/projeto_imc.dart' ;
 
 void main(List<String> arguments) {
-  print('Hello world: ${projeto_imc.calculate()}!');
+  Pessoa pessoa = Pessoa('João',92,1.8);
+  var imc = pessoa.calculaImc();
+  print(imc);
+  print(pessoa.getClassification(imc));
 }
