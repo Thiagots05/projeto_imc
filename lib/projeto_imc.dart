@@ -1,7 +1,6 @@
-int calculate() {
-  return 6 * 7;
-}
+import 'dart:developer';
 
+import 'package:projeto_imc/errors.dart';
 
 class Pessoa{
   final String nome;
@@ -10,8 +9,36 @@ class Pessoa{
 
   Pessoa(this.nome, this.peso, this.altura);
 
+  void validaAltura(){      
+      if (altura > 3) {
+         throw InvalidHeightException();
+      }
+    }
+
+    void validaPeso(){      
+      if (peso == 0) {
+         throw InvalidWeightException();
+      }
+    }
+
   double calculaImc(){
-    return peso/(altura*altura);
+    var imc = 0.0;
+    try {
+        validaPeso();
+        validaAltura();
+
+        imc =  peso/(altura*altura);
+        if(imc.isInfinite)throw DividedByZeroException();
+    } on DividedByZeroException catch (e){
+      log(e.toString());
+    } on InvalidHeightException catch (e){
+      log(e.toString());
+    } on InvalidWeightException catch (e){
+      log(e.toString());
+    }catch (e) {
+      log(e.toString());
+    }
+    return imc;
   }
 
   String getClassification(double imc){
