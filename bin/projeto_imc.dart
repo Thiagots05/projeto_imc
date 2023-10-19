@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:projeto_imc/projeto_imc.dart' ;
+import 'package:projeto_imc/projeto_imc.dart';
 
 void main(List<String> arguments) {
   print('Informe o nome: ');
@@ -10,8 +10,10 @@ void main(List<String> arguments) {
   print('Informe a altura em metros: ');
   var altura = double.tryParse(stdin.readLineSync()!);
 
-  Pessoa pessoa = Pessoa(nome!,peso!,altura!);
+  Pessoa pessoa = Pessoa(nome: nome, peso: peso, altura: altura);
   var imc = pessoa.calculaImc();
-  print(imc.toStringAsFixed(2));
-  print(pessoa.getClassification(imc));
+  if (imc != 0) {
+    print('-----------------\nIMC: ${imc.toStringAsFixed(2)}');
+    print(pessoa.getClassification(imc));
+  }
 }
